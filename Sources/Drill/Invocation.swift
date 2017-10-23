@@ -38,6 +38,14 @@ public struct Invocation {
             let lexer = Lexer(input: contents, filePath: path)
             let tokens = lexer.tokenize()
             switch options.mode {
+            case .parseVerify:
+              let layoutTokens = layout(tokens)
+              let parser = Parser(tokens: layoutTokens)
+              _ = parser.parseTopLevelModule()
+              let verifier =
+                try DiagnosticVerifier(file: url,
+                                       producedDiagnostics: engine.diagnostics)
+              verifier.verify()
             case .compile:
               fatalError("only Parse is implemented")
             case .dump(.tokens):

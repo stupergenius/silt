@@ -27,6 +27,7 @@ public enum Mode {
     case shined
   }
   case dump(DumpKind)
+  case parseVerify
   case compile
 }
 
