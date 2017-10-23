@@ -43,7 +43,7 @@ public struct Invocation {
               let parser = Parser(tokens: layoutTokens)
               _ = parser.parseTopLevelModule()
               let verifier =
-                try DiagnosticVerifier(file: url,
+                try DiagnosticVerifier(tokens: tokens,
                                        producedDiagnostics: engine.diagnostics)
               verifier.verify()
             case .compile:
